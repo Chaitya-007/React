@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
     children: ReactNode;
-    color?: 'primary' | 'secondary' | 'success';
+    color?: 'primary' | 'secondary' | 'success' | 'danger';
     onClick: () => void;
 }
 
