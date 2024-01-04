@@ -1,5 +1,21 @@
 // import { MouseEvent } from "react";
 import { useState } from "react";
+import styles from "./ListGroup.module.css";
+import styled from 'styled-components';
+
+const List = styled.ul`
+list-style: none;
+padding: 0;
+`;
+
+interface ListItemProps {
+  active: boolean;
+}
+
+const ListItem = styled.li<ListItemProps>`
+padding: 5px 0;
+background-color: ${props => props.active ? 'blue' : 'none'};
+`;
 
 // {items: [], heading : string}
 interface Props {
@@ -17,9 +33,11 @@ function ListGroup({ items, heading, onSelectitem }: Props) {
   // const handleClick = (event: MouseEvent) => {console.log(event)};
 
   //Hook
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  // const [selectedIndex, setSelectedIndex] = useState(-1);
   // arr[0] // variable (selectedIndex)
   // arr[1] // updater function
+
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   // items = [];
 
@@ -36,14 +54,19 @@ function ListGroup({ items, heading, onSelectitem }: Props) {
       {/* {getMessage()} */}
       {/* {items.length === 0 ? <p>No items</p> : null} */}
       {items.length === 0 && <p>No items</p>}
-      <ul className="list-group">
+      {/* <ul className="list-group"> */}
+      {/* <ul className={styles['list-group']}> */}
+      {/* <ul className={[styles.ListGroup, styles.container]. join(' ')}> */}
+      <List>
         {items.map((item, index) => (
-          <li
-            className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
-            }
+          <ListItem
+          // Remove this since you have used styled components
+            // className={
+            //   selectedIndex === index
+            //     ? "list-group-item active"
+            //     : "list-group-item"
+            // }
+            active={selectedIndex === index}
             key={item}
             onClick={() => {
               setSelectedIndex(index);
@@ -51,9 +74,9 @@ function ListGroup({ items, heading, onSelectitem }: Props) {
             }}
           >
             {item}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 }
